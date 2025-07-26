@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice #INV-2024-001</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+
+      .invoice-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .invoice-header {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+        padding: 30px;
+        position: relative;
+      }
+
+      .invoice-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(30px, -30px);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .company-info h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .company-info p {
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .invoice-title {
+        text-align: right;
+      }
+
+      .invoice-title h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .invoice-number {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+
+      .invoice-body {
+        padding: 30px;
+      }
+
+      .invoice-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .detail-section h3 {
+        color: #ff6b35;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ff6b35;
+        padding-bottom: 5px;
+      }
+
+      .detail-section p {
+        margin-bottom: 8px;
+        color: #666;
+      }
+
+      .detail-section strong {
+        color: #333;
+      }
+
+      .invoice-meta {
+        background: #fff5f0;
+        border-left: 4px solid #ff6b35;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .meta-item {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .meta-label {
+        font-weight: 600;
+        color: #ff6b35;
+      }
+
+      .items-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .items-table thead {
+        background: #ff6b35;
+        color: white;
+      }
+
+      .items-table th,
+      .items-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      .items-table th {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+
+      .items-table tbody tr:hover {
+        background-color: #fff5f0;
+      }
+
+      .items-table .text-right {
+        text-align: right;
+      }
+
+      .items-table .text-center {
+        text-align: center;
+      }
+
+      .totals-section {
+        margin-left: auto;
+        width: 300px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .total-row:last-child {
+        border-bottom: none;
+        background: #ff6b35;
+        color: white;
+        margin: 10px -20px -20px;
+        padding: 15px 20px;
+        border-radius: 0 0 8px 8px;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .invoice-footer {
+        background: #f8f9fa;
+        padding: 30px;
+        border-top: 1px solid #dee2e6;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .footer-section h4 {
+        color: #ff6b35;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+
+      .footer-section p,
+      .footer-section li {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .footer-section li::before {
+        content: "•";
+        color: #ff6b35;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #28a745;
+        color: white;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-badge.pending {
+        background: #f7931e;
+        color: #ffffff;
+      }
+
+      .status-badge.overdue {
+        background: #dc3545;
+      }
+
+      /* Print Button */
+      .print-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .print-button:hover {
+        background: #e55a2b;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .invoice-title {
+          text-align: center;
+        }
+
+        .invoice-details {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .meta-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .items-table {
+          font-size: 0.9rem;
+        }
+
+        .items-table th,
+        .items-table td {
+          padding: 10px 8px;
+        }
+
+        .totals-section {
+          width: 100%;
+          margin: 0;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .print-button {
+          position: static;
+          margin: 20px auto;
+          display: block;
+          width: fit-content;
+        }
+      }
+
+      /* A4 Print Optimization */
+      @media print {
+        @page {
+          size: A4;
+          margin: 0.5in;
+        }
+
+        * {
+          -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        body {
+          background: white !important;
+          padding: 0 !important;
+          font-size: 12pt;
+          line-height: 1.4;
+        }
+
+        .invoice-container {
+          max-width: none !important;
+          width: 100% !important;
+          box-shadow: none !important;
+          border-radius: 0 !important;
+          margin: 0 !important;
+          page-break-inside: avoid;
+        }
+
+        .print-button {
+          display: none !important;
+        }
+
+        .invoice-header {
+          background: linear-gradient(135deg, #ff6b35, #f7931e) !important;
+          color: white !important;
+          padding: 20pt !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .invoice-header::before {
+          background: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .company-info h1 {
+          font-size: 24pt !important;
+          margin-bottom: 4pt !important;
+        }
+
+        .company-info p {
+          font-size: 12pt !important;
+        }
+
+        .invoice-title h2 {
+          font-size: 20pt !important;
+          margin-bottom: 8pt !important;
+        }
+
+        .invoice-number {
+          background: rgba(255, 255, 255, 0.2) !important;
+          padding: 6pt 12pt !important;
+          border-radius: 15pt !important;
+          font-size: 11pt !important;
+        }
+
+        .invoice-body {
+          padding: 20pt !important;
+        }
+
+        .invoice-details {
+          margin-bottom: 25pt !important;
+          gap: 20pt !important;
+        }
+
+        .detail-section h3 {
+          font-size: 14pt !important;
+          margin-bottom: 10pt !important;
+          color: #ff6b35 !important;
+          border-bottom: 1.5pt solid #ff6b35 !important;
+          padding-bottom: 3pt !important;
+        }
+
+        .detail-section p {
+          font-size: 10pt !important;
+          margin-bottom: 4pt !important;
+          color: #333 !important;
+        }
+
+        .invoice-meta {
+          background: #fff5f0 !important;
+          border-left: 3pt solid #ff6b35 !important;
+          padding: 15pt !important;
+          margin-bottom: 20pt !important;
+          border-radius: 0 6pt 6pt 0 !important;
+          page-break-inside: avoid;
+        }
+
+        .meta-grid {
+          gap: 10pt !important;
+        }
+
+        .meta-item {
+          font-size: 10pt !important;
+        }
+
+        .meta-label {
+          color: #ff6b35 !important;
+        }
+
+        .status-badge {
+          padding: 4pt 8pt !important;
+          font-size: 8pt !important;
+          border-radius: 12pt !important;
+        }
+
+        .items-table {
+          margin-bottom: 20pt !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          border: 1pt solid #ddd !important;
+          page-break-inside: avoid;
+        }
+
+        .items-table thead {
+          background: #ff6b35 !important;
+          color: white !important;
+        }
+
+        .items-table th,
+        .items-table td {
+          padding: 8pt 10pt !important;
+          font-size: 10pt !important;
+          border-bottom: 0.5pt solid #eee !important;
+        }
+
+        .items-table th {
+          font-size: 9pt !important;
+          font-weight: 600 !important;
+        }
+
+        .items-table tbody tr:hover {
+          background-color: transparent !important;
+        }
+
+        .totals-section {
+          width: 250pt !important;
+          background: #f8f9fa !important;
+          padding: 15pt !important;
+          border-radius: 6pt !important;
+          page-break-inside: avoid;
+        }
+
+        .total-row {
+          padding: 6pt 0 !important;
+          font-size: 10pt !important;
+          border-bottom: 0.5pt solid #dee2e6 !important;
+        }
+
+        .total-row:last-child {
+          background: #ff6b35 !important;
+          color: white !important;
+          margin: 8pt -15pt -15pt !important;
+          padding: 12pt 15pt !important;
+          font-size: 12pt !important;
+          font-weight: 700 !important;
+          border-radius: 0 0 6pt 6pt !important;
+        }
+
+        .invoice-footer {
+          background: #f8f9fa !important;
+          padding: 20pt !important;
+          border-top: 1pt solid #dee2e6 !important;
+          page-break-inside: avoid;
+        }
+
+        .footer-content {
+          gap: 20pt !important;
+        }
+
+        .footer-section h4 {
+          color: #ff6b35 !important;
+          margin-bottom: 10pt !important;
+          font-size: 12pt !important;
+        }
+
+        .footer-section p,
+        .footer-section li {
+          color: #333 !important;
+          font-size: 9pt !important;
+          margin-bottom: 3pt !important;
+        }
+
+        .footer-section li::before {
+          color: #ff6b35 !important;
+        }
+
+        /* Ensure proper page breaks */
+        .invoice-header {
+          page-break-after: avoid;
+        }
+
+        .invoice-meta {
+          page-break-after: avoid;
+        }
+
+        .items-table {
+          page-break-before: avoid;
+          page-break-after: avoid;
+        }
+
+        .totals-section {
+          page-break-before: avoid;
+        }
+
+        .invoice-footer {
+          page-break-before: avoid;
+        }
+
+        /* Force exact colors for webkit browsers */
+        .invoice-header,
+        .items-table thead,
+        .total-row:last-child,
+        .detail-section h3,
+        .meta-label,
+        .footer-section h4,
+        .footer-section li::before {
+          -webkit-print-color-adjust: exact !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="print-button" onclick="window.print()">
+      🖨️ Print Invoice
+    </button>
+    <div class="invoice-container">
+      <!-- Header -->
+      <div class="invoice-header">
+        <div class="header-content">
+          <div class="company-info">
+            <h1>PN Computer</h1>
+            <p>Professional Network Solutions</p>
+          </div>
+          <div class="invoice-title">
+            <h2>INVOICE</h2>
+            <div class="invoice-number" *ngIf="ordernumber">
+              # {{ ordernumber }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="invoice-body">
+        <!-- Invoice Meta Information -->
+        <div class="invoice-meta">
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Invoice Date:</span>
+              <span>{{ today | date : "mediumDate" }}</span>
+            </div>
+
+            <div class="meta-item">
+              <span class="meta-label">Payment Method:</span>
+              <span>Bakong</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Status:</span>
+              <span class="status-badge pending">Paid</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bill To/From Details -->
+        <div class="invoice-details">
+          <div class="detail-section">
+            <h3>Bill From</h3>
+            <p><strong>PN Computer</strong></p>
+            <p>Location: 821 A Sihanouk Province, 18000</p>
+            <p>Cambodia</p>
+            <p>Phone: 087 555 403</p>
+          </div>
+          <div *ngIf="getOrder">
+            <div class="detail-section" *ngIf="getUser">
+              <h3>Bill To</h3>
+              <p><strong>Value Customer</strong></p>
+              <p>Username: {{ getUser.username }}</p>
+              <p>Country: {{ getOrder[0]?.country }}</p>
+              <p>City: {{ getOrder[0]?.city }}</p>
+              <p>Address: {{ getOrder[0]?.addressline }}</p>
+              <p>Phone: {{ getUser.phone }}</p>
+              <p>Email: {{ getUser.email }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Items Table -->
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th class="text-center">Qty</th>
+              <th class="text-right">Price</th>
+              <th class="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of getOrder">
+              <td>
+                <strong>{{ getProductNameById(data.proid) }}</strong
+                ><br />
+              </td>
+              <td class="text-center">{{ data.qty }}</td>
+              <td class="text-right">$ {{ data.price }}</td>
+              <td class="text-right">$ {{ data.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Totals -->
+        <div class="totals-section">
+          <div class="total-row">
+            <span>Total Amount In Dollar:</span>
+            <span>$ {{ totalAmount }}</span>
+          </div>
+
+          <div class="total-row" *ngIf="totalAmount">
+            <span>Total Amount In Riel:</span>
+            <span>{{ totalAmountRiel }} ៛</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

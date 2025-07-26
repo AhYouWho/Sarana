@@ -1,0 +1,110 @@
+<app-navbar [cartCount]="cartCount"></app-navbar>
+<div class="page-wrapper">
+  <main class="main-container">
+    <div class="content-layout">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-box">
+          <div class="filter-header">
+            <h2 class="filter-title">Filters</h2>
+          </div>
+
+          <!-- Category -->
+          <div class="filter-section">
+            <h3 class="filter-subtitle">Category</h3>
+            <div class="filter-value">{{ getParamValue | titlecase }}</div>
+          </div>
+
+          <!-- Subcategory -->
+          <div class="filter-section">
+            <h3 class="filter-subtitle">Subcategory</h3>
+            <select
+              class="filter-select"
+              [value]="SubCategorySelected"
+              (change)="filterSelect($event)"
+            >
+              <option value="all">All Subcategories</option>
+              <option
+                *ngFor="let data of getSubCategoryOption"
+                [value]="data.subcateid"
+              >
+                {{ data.subcategory }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Product Content -->
+      <section class="product-content">
+        <!-- Search -->
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Search products..."
+            class="search-input"
+            [(ngModel)]="searchText"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <h2 class="product-heading">Products</h2>
+
+        <div class="product-grid">
+          <div
+            *ngFor="
+              let data of filterProductData
+                | paginate : { itemsPerPage: 6, currentPage: p }
+            "
+            class="product-card"
+          >
+            <img
+              [src]="imageUrl + data.image"
+              [alt]="data.pdName"
+              class="product-image"
+            />
+            <div class="product-info">
+              <h3 class="product-name">{{ data.proname }}</h3>
+              <p class="product-desc">{{ data.prodes }}</p>
+              <div class="product-footer">
+                <span class="product-price"> {{ data.price | number }}$ </span>
+                <a
+                  [routerLink]="['/product-detail', data.cateid, data.proid]"
+                  class="view-details"
+                >
+                  View Details
+                </a>
+                <a
+                  class="btn btn-cart"
+                  style="color: #ff7b00"
+                  (click)="addCart(data.proid)"
+                >
+                  <i class="bi bi bi-cart3"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <nav class="pagination">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <!-- <a href="#" class="pagination-btn">
+          <i class="ri-arrow-left-s-line ri-lg"></i>
+        </a>
+        <a href="#" class="pagination-page active">1</a>
+        <a href="#" class="pagination-page">2</a>
+        <a href="#" class="pagination-page">3</a>
+        <span class="pagination-dots">...</span>
+        <a href="#" class="pagination-page">8</a>
+        <a href="#" class="pagination-btn">
+          <i class="ri-arrow-right-s-line ri-lg"></i>
+        </a> -->
+      </nav>
+    </div>
+  </main>
+</div>
+<app-footer></app-footer>

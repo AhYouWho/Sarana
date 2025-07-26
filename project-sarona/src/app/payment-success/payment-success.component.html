@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Complete</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          45deg,
+          #fff7ed 0%,
+          #ffedd5 50%,
+          #ffffff 100%
+        );
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .background-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            #f97316 2px,
+            transparent 2px
+          ),
+          radial-gradient(circle at 75% 75%, #fb923c 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: patternMove 20s linear infinite;
+      }
+
+      .success-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 3.5rem 3rem;
+        text-align: center;
+        box-shadow: 0 25px 50px rgba(249, 115, 22, 0.15),
+          0 0 0 1px rgba(255, 255, 255, 0.8);
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+        z-index: 10;
+      }
+
+      .success-icon-container {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      .success-circle {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #fb923c, #f97316);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        position: relative;
+        animation: pulseGlow 2s ease-in-out infinite;
+      }
+
+      .success-circle::before {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border: 2px solid rgba(249, 115, 22, 0.3);
+        border-radius: 50%;
+        animation: ripple 2s ease-out infinite;
+      }
+
+      .checkmark-icon {
+        width: 50px;
+        height: 50px;
+        stroke: white;
+        stroke-width: 4;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        animation: drawCheckmark 1s ease-out 0.5s both;
+      }
+
+      .main-title {
+        color: #c2410c;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        letter-spacing: -0.5px;
+        animation: slideUp 0.8s ease-out 0.3s both;
+      }
+
+      .subtitle {
+        color: #546e7a;
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+        font-weight: 400;
+        animation: slideUp 0.8s ease-out 0.5s both;
+      }
+
+      .payment-summary {
+        background: linear-gradient(135deg, #fff7ed, #ffffff);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid #fed7aa;
+        animation: slideUp 0.8s ease-out 0.7s both;
+      }
+
+      .amount-display {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #c2410c;
+        margin-bottom: 1rem;
+      }
+
+      .payment-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        font-size: 0.95rem;
+      }
+
+      .info-item {
+        text-align: left;
+      }
+
+      .info-label {
+        color: #78909c;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+      }
+
+      .info-value {
+        color: #37474f;
+        font-weight: 600;
+      }
+
+      .action-section {
+        animation: slideUp 0.8s ease-out 0.9s both;
+      }
+
+      .primary-button {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+      }
+
+      .primary-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+        background: linear-gradient(135deg, #ea580c, #dc2626);
+      }
+
+      .secondary-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+
+      .secondary-link {
+        background: none;
+        border: none;
+        outline: none;
+        color: #fb923c;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        cursor: pointer;
+      }
+
+      .secondary-link:hover {
+        color: #ea580c;
+        text-decoration: underline;
+      }
+
+      .decorative-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .floating-shape {
+        position: absolute;
+        background: rgba(249, 115, 22, 0.1);
+        border-radius: 50%;
+      }
+
+      .shape-1 {
+        width: 100px;
+        height: 100px;
+        top: 10%;
+        left: 5%;
+        animation: floatSlow 8s ease-in-out infinite;
+      }
+
+      .shape-2 {
+        width: 60px;
+        height: 60px;
+        top: 15%;
+        right: 10%;
+        animation: floatSlow 6s ease-in-out infinite reverse;
+      }
+
+      .shape-3 {
+        width: 80px;
+        height: 80px;
+        bottom: 20%;
+        left: 8%;
+        animation: floatSlow 10s ease-in-out infinite;
+      }
+
+      .shape-4 {
+        width: 120px;
+        height: 120px;
+        bottom: 10%;
+        right: 5%;
+        animation: floatSlow 7s ease-in-out infinite reverse;
+      }
+
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
+        }
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: scale(0.8);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      @keyframes drawCheckmark {
+        0% {
+          stroke-dasharray: 0 100;
+        }
+        100% {
+          stroke-dasharray: 100 0;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatSlow {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-30px) rotate(180deg);
+        }
+      }
+
+      @keyframes patternMove {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 50px 50px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .success-card {
+          padding: 2.5rem 2rem;
+          margin: 1rem;
+        }
+
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .payment-info {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .secondary-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="background-pattern"></div>
+
+    <div class="decorative-elements">
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+      <div class="floating-shape shape-4"></div>
+    </div>
+
+    <div class="success-card">
+      <div class="success-icon-container">
+        <div class="success-circle">
+          <svg class="checkmark-icon" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="main-title">Payment Complete</h1>
+      <p class="subtitle">Thank you for your purchase!</p>
+
+      <div class="payment-summary" *ngIf="getOrder">
+        <div class="amount-display" *ngIf="totalAmount">
+          $ {{ totalAmount }}
+        </div>
+        <div class="payment-info">
+          <div class="info-item">
+            <div class="info-label">Order ID</div>
+            <div class="info-value" *ngIf="ordernumber">
+              # {{ ordernumber }}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Payment Method</div>
+            <div class="info-value">Bakong</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Date</div>
+            <div class="info-value">{{ today | date : "mediumDate" }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Status</div>
+            <div class="info-value">Paid</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-section">
+        <button class="primary-button" (click)="goHome()">
+          Continue Shopping
+        </button>
+        <div class="secondary-links">
+          <a class="secondary-link" (click)="goInvoice()"> Show Receipt </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

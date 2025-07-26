@@ -1,0 +1,511 @@
+<!-- Favorites Header -->
+<div
+  class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8"
+>
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">My Favorites</h1>
+    <p class="text-gray-600 mt-1">You have 8 items in your favorites list</p>
+  </div>
+
+  <!-- Filter Options -->
+  <div class="mt-4 md:mt-0 flex items-center space-x-4">
+    <div class="relative">
+      <button
+        id="sortButton"
+        class="flex items-center space-x-2 bg-white border border-gray-300 rounded-button px-4 py-2 text-sm text-gray-700 whitespace-nowrap"
+      >
+        <span>Sort by: Price</span>
+        <div class="w-4 h-4 flex items-center justify-center">
+          <i class="ri-arrow-down-s-line"></i>
+        </div>
+      </button>
+      <div
+        id="sortDropdown"
+        class="hidden absolute right-0 mt-2 w-48 bg-white rounded shadow-lg z-10"
+      >
+        <div class="py-1">
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >Price: Low to High</a
+          >
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >Price: High to Low</a
+          >
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >Date Added</a
+          >
+          <a
+            href="#"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >Name: A to Z</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button
+        class="w-9 h-9 flex items-center justify-center bg-white border border-gray-300 rounded-button text-gray-700 whitespace-nowrap"
+      >
+        <i class="ri-layout-grid-line"></i>
+      </button>
+      <button
+        class="w-9 h-9 flex items-center justify-center bg-white border border-gray-300 rounded-button text-gray-700 whitespace-nowrap"
+      >
+        <i class="ri-list-check-2"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Products Grid -->
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+>
+  <!-- Product Card 1 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Modern%20gaming%20laptop%20with%20RGB%20keyboard%20and%20sleek%20design%2C%20high%20resolution%20display%2C%20placed%20on%20a%20minimalist%20desk%20with%20clean%20background%2C%20product%20photography%20style%2C%20white%20background&width=600&height=400&seq=1&orientation=landscape"
+        alt="Gaming Laptop"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">
+        ASUS ROG Strix G15 Gaming Laptop
+      </h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-half-fill"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(128)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$1,499.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$1,799.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 2 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Professional%20desktop%20computer%20setup%20with%20dual%20monitors%2C%20sleek%20tower%20case%2C%20wireless%20keyboard%20and%20mouse%2C%20on%20a%20clean%20desk%20with%20minimal%20accessories%2C%20product%20photography%20style%2C%20white%20background&width=600&height=400&seq=2&orientation=landscape"
+        alt="Desktop Computer"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">
+        Dell XPS Desktop Special Edition
+      </h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-line"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(86)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$1,299.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$1,499.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 3 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Ultra-thin%20modern%20monitor%20with%20borderless%20design%2C%20high%20resolution%20display%2C%20adjustable%20stand%2C%20displayed%20against%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=3&orientation=landscape"
+        alt="Monitor"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">LG UltraGear 27" Gaming Monitor</h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(214)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$349.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$449.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 4 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Professional%20wireless%20mechanical%20keyboard%20with%20RGB%20backlight%2C%20sleek%20design%2C%20ergonomic%20layout%2C%20displayed%20on%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=4&orientation=landscape"
+        alt="Mechanical Keyboard"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">
+        Corsair K95 RGB Mechanical Keyboard
+      </h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-half-fill"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(176)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$169.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$199.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 5 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=High-performance%20gaming%20mouse%20with%20ergonomic%20design%2C%20RGB%20lighting%2C%20multiple%20programmable%20buttons%2C%20displayed%20on%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=5&orientation=landscape"
+        alt="Gaming Mouse"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">
+        Logitech G Pro X Superlight Mouse
+      </h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-line"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(92)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$129.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$149.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 6 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Premium%20gaming%20headset%20with%20noise-cancelling%20microphone%2C%20comfortable%20ear%20cups%2C%20RGB%20lighting%2C%20displayed%20on%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=6&orientation=landscape"
+        alt="Gaming Headset"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">SteelSeries Arctis Pro Wireless</h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-half-fill"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(156)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$249.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$329.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 7 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=High-capacity%20external%20SSD%20drive%20with%20sleek%20metal%20casing%2C%20compact%20design%2C%20USB-C%20connection%2C%20displayed%20on%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=7&orientation=landscape"
+        alt="External SSD"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">Samsung T7 1TB Portable SSD</h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-line"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(78)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$139.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$179.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Card 8 -->
+  <div class="card bg-white rounded overflow-hidden shadow-sm hover:shadow-md">
+    <div class="relative">
+      <img
+        src="https://readdy.ai/api/search-image?query=Professional%20graphics%20tablet%20with%20stylus%20pen%2C%20slim%20design%2C%20large%20drawing%20surface%2C%20displayed%20on%20a%20clean%20white%20background%2C%20product%20photography%20style&width=600&height=400&seq=8&orientation=landscape"
+        alt="Graphics Tablet"
+        class="w-full h-56 object-cover object-top"
+      />
+      <button
+        class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow text-primary"
+      >
+        <i class="ri-heart-fill"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <h3 class="font-medium text-gray-900">Wacom Intuos Pro Medium</h3>
+      <div class="flex items-center mt-1 mb-2">
+        <div class="flex text-yellow-400">
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+          <i class="ri-star-fill"></i>
+        </div>
+        <span class="text-xs text-gray-500 ml-1">(123)</span>
+      </div>
+      <div class="flex items-center justify-between mt-2">
+        <div>
+          <span class="text-lg font-bold text-gray-900">$299.99</span>
+          <span class="text-sm text-gray-500 line-through ml-2">$379.99</span>
+        </div>
+      </div>
+      <div class="flex space-x-2 mt-4">
+        <button
+          class="flex-1 bg-primary text-white py-2 px-4 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+        >
+          Add to Cart
+        </button>
+        <button
+          class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-button text-gray-500 hover:text-gray-700 whitespace-nowrap"
+        >
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Empty State (Hidden by default) -->
+<div class="hidden flex flex-col items-center justify-center py-16">
+  <div class="w-24 h-24 flex items-center justify-center text-gray-300 mb-4">
+    <i class="ri-heart-line ri-4x"></i>
+  </div>
+  <h3 class="text-xl font-medium text-gray-900 mb-2">No favorites yet</h3>
+  <p class="text-gray-600 mb-6 text-center max-w-md">
+    Explore our products and add your favorites to create your wishlist
+  </p>
+  <a
+    href="#"
+    class="bg-primary text-white py-2 px-6 rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
+  >
+    Continue Shopping
+  </a>
+</div>
+
+<!-- Pagination -->
+<div class="flex justify-center mt-12">
+  <nav class="flex items-center space-x-1">
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button border border-gray-300 text-gray-600 hover:bg-gray-50"
+    >
+      <i class="ri-arrow-left-s-line"></i>
+    </a>
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button bg-primary text-white"
+      >1</a
+    >
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button border border-gray-300 text-gray-600 hover:bg-gray-50"
+      >2</a
+    >
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button border border-gray-300 text-gray-600 hover:bg-gray-50"
+      >3</a
+    >
+    <span class="w-10 h-10 flex items-center justify-center text-gray-600"
+      >...</span
+    >
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button border border-gray-300 text-gray-600 hover:bg-gray-50"
+      >8</a
+    >
+    <a
+      href="#"
+      class="w-10 h-10 flex items-center justify-center rounded-button border border-gray-300 text-gray-600 hover:bg-gray-50"
+    >
+      <i class="ri-arrow-right-s-line"></i>
+    </a>
+  </nav>
+</div>

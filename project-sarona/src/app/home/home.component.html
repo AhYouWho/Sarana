@@ -1,0 +1,184 @@
+<app-navbar [cartCount]="cartCount"></app-navbar>
+
+<main class="container-fluid p-0">
+  <!-- banner start -->
+  <div
+    id="carouselExampleAutoplaying"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        *ngFor="let data of bannerImgs; let i = index"
+        [class.active]="i === 0"
+      >
+        <img src="{{ data.img }}" class="d-block w-100" alt="..." />
+      </div>
+    </div>
+
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- banner end -->
+
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <!-- Categories Sidebar -->
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="categorisBox p-3 shadow-sm rounded">
+          <h5 class="mb-3 text-center">Categories</h5>
+
+          <div class="mb-3" *ngFor="let data of getCategorisData">
+            <!-- Category Row -->
+            <div class="categorisContent">
+              <a
+                [routerLink]="['/product-page', data.name]"
+                class="d-flex align-items-center"
+              >
+                <img src="{{ data.img }}" class="category-icon" />
+                <span class="category-name ms-2">{{ data.name }}</span>
+              </a>
+            </div>
+
+            <!-- Subcategories under Category -->
+            <div hidden>{{ getSubcategory(data.id) }}</div>
+            <div
+              class="subcategory-list"
+              *ngFor="let subcate of SubcategoryFilterd"
+            >
+              <div
+                class="subcategory-item"
+                [routerLink]="['/product-page', data.name, subcate.subcateid]"
+              >
+                {{ subcate.subcategory }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Social Sidebar -->
+        <div class="social-sidebar p-3 shadow-sm rounded">
+          <h5 class="mb-3 text-center">Follow Us</h5>
+
+          <div class="d-flex flex-column align-items-center gap-3">
+            <a
+              href="https://www.facebook.com/profile.php?id=100067674333532"
+              target="_blank"
+              class="social-link facebook"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://t.me/ravuth_keo"
+              target="_blank"
+              class="social-link telegram"
+            >
+              <i class="fab fa-telegram-plane"></i>
+            </a>
+            <!-- <a
+              href="https://instagram.com"
+              target="_blank"
+              class="social-link instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              class="social-link youtube"
+            >
+              <i class="fab fa-youtube"></i>
+            </a> -->
+          </div>
+        </div>
+        <!-- Promo Box
+        <div class="promo-box p-3 shadow-sm rounded">
+          <img
+            src="assets/images/promo.jpg"
+            alt="Promo"
+            class="img-fluid rounded"
+          />
+        </div> -->
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-9 col-md-8">
+        <section class="product-content">
+          <h2 class="product-heading">Products</h2>
+
+          <div class="product-grid">
+            <div
+              *ngFor="
+                let data of getProductList
+                  | paginate : { itemsPerPage: 15, currentPage: p }
+              "
+              class="product-card"
+            >
+              <img
+                [src]="imageUrl + data.image"
+                [alt]="data.pdName"
+                class="product-image"
+              />
+              <div class="product-info">
+                <h3 class="product-name">{{ data.proname }}</h3>
+                <p class="product-desc">{{ data.prodes }}</p>
+                <div class="product-footer">
+                  <span class="product-price">
+                    {{ data.price | number }}$
+                  </span>
+                  <a
+                    [routerLink]="['/product-detail', data.cateid, data.proid]"
+                    class="view-details"
+                  >
+                    View Details
+                  </a>
+                  <a
+                    class="btn btn-cart"
+                    style="color: #ff7b00"
+                    (click)="addCart(data.proid)"
+                  >
+                    <i class="bi bi bi-cart3"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="pagination-wrapper">
+          <nav class="pagination">
+            <pagination-controls (pageChange)="p = $event"
+              >aaa</pagination-controls
+            >
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Telegram Button -->
+  <div class="telegram-sticky">
+    <div class="telegram-btn" id="telegram-btn">
+      <i class="fab fa-telegram-plane"></i>
+    </div>
+    <div class="telegram-tooltip">Chat with us on Telegram</div>
+  </div>
+</main>
+
+<app-footer></app-footer>

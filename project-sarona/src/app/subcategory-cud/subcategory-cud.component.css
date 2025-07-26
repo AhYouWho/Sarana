@@ -1,0 +1,91 @@
+Custom Orange Theme Styles body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fff5f2 0%, #ffffff 100%);
+  color: #333;
+  line-height: 1.6;
+}
+.btn-orange {
+  background-color: #000000;
+  color: white;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.text-orange {
+  color: #000000 !important;
+}
+
+.activest {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.inactivest {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.table th {
+  color: #000000 !important;
+}
+
+.table td {
+  color: #000000 !important;
+}
+
+.dropdown-item:hover {
+  background-color: #fff5f2;
+  color: #000000;
+}
+
+.modal-header {
+  background-color: #000000;
+  color: white;
+}
+
+.modal-title {
+  color: white !important;
+}
+
+.btn-close {
+  filter: brightness(0) invert(1);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+}
+
+.btn-primary {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-primary:hover {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-warning {
+  background-color: #f7931e;
+  border-color: #f7931e;
+}
+
+.btn-warning:hover {
+  background-color: #e8840d;
+  border-color: #e8840d;
+}
+.dataTables_empty {
+  display: none;
+}

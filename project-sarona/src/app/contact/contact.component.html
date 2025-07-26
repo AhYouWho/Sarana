@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<header class="header">
+  <h1>Contact Us</h1>
+  <p>We'd love to hear from you!</p>
+</header>
+<div class="container">
+  <div class="contact-section">
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h2>Get in Touch</h2>
+      <form>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your name"
+          required
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your email"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Your message"
+          required
+        ></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+    <!-- Map -->
+    <div class="map">
+      <h2 style="text-align: center">Find Us</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3921.446510361585!2d103.53705257461047!3d10.62237818951718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3107e1d0a29222e9%3A0xa79200dbbb0182d0!2zUE4gQ09NUFVURVIvIOGel-GeuOGeouGet-GekyDhnoDhnrvhn4bhnpbhn5LhnpnhnrzhnpHhn5Dhnpo!5e0!3m2!1sen!2skh!4v1753269677172!5m2!1sen!2skh"
+        width="600"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

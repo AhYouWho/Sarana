@@ -1,0 +1,81 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div
+    class="sidebar bg-dark text-white"
+    style="width: 280px; height: 100vh; position: fixed; top: 0"
+  >
+    <a
+      href="/"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+    >
+      <i class="bi bi-android me-2" style="font-size: 1.5rem"></i>
+      <span class="fs-4">PN Computer</span>
+    </a>
+    <hr />
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="bi bi-speedometer2 me-2"></i>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="/product-cud" class="nav-link text-white">
+          <i class="bi bi-box me-2"></i>
+          Products
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/subcategory-cud" class="nav-link text-white">
+          <i class="bi bi-bag-heart me-2"></i>
+          Subcategory
+        </a>
+      </li>
+      <li>
+        <a routerLink="/user-cud" class="nav-link text-white">
+          <i class="bi bi-people me-2"></i>
+          User
+        </a>
+      </li>
+      <li>
+        <a routerLink="/order-cud" class="nav-link text-white">
+          <i class="bi bi-box me-2"></i>
+          Order
+        </a>
+      </li>
+    </ul>
+    <hr />
+    <div class="dropdown">
+      <a
+        href="#"
+        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+        id="dropdownUser1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img
+          src="assets/images/user.png"
+          alt=""
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <strong>Admin</strong>
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-dark text-small shadow"
+        aria-labelledby="dropdownUser1"
+      >
+        <li><a class="dropdown-item" (click)="Logout()">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content (Product Page) -->
+  <div class="content" style="margin-left: 280px; padding: 1rem; width: 100%">
+    <div class="container mt-4">
+      <!-- Your Product Page content here -->
+    </div>
+  </div>
+</div>

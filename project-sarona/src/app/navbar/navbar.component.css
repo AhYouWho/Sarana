@@ -1,0 +1,84 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background: linear-gradient(to right, #ffc156, #ff7f1a); /* orange gradient */
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+  flex: 1;
+}
+
+.logo {
+  font-size: 26px;
+  font-family: fantasy;
+  color: #fff;
+}
+
+.navbar-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar-center a {
+  text-decoration: none;
+  color: #fff; /* White for contrast */
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-center a:hover {
+  color: #ffe3c5; /* Lighter orange on hover */
+}
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.navbar-right a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-right a:hover {
+  color: #ffe3c5;
+}
+
+.cartCount {
+  background: #dc2626; /* Red badge */
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-center,
+  .navbar-right {
+    justify-content: flex-start;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

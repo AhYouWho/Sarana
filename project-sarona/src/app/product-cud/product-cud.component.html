@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subcategory Management</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <app-sidebar></app-sidebar>
+
+      <!-- Main Content -->
+      <div class="container" style="margin-top: 20px; color: #000000">
+        <div class="content-header">
+          <h1 class="page-title">Product Management</h1>
+          <p class="page-subtitle">Manage and organize your products</p>
+        </div>
+        <button
+          type="button"
+          class="btn btn-orange mt-2 mb-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="AddNewSubcategory()"
+        >
+          Add New
+        </button>
+        <table
+          class="table fs-8 mb-0"
+          id="dtSubcategory"
+          style="color: black"
+          *ngIf="productList"
+          datatable
+          [dtOptions]="dtoptions"
+          [dtTrigger]="dtTrigger"
+        >
+          <thead>
+            <tr>
+              <th scope="col" class="text-orange">No</th>
+              <th scope="col" class="text-orange">Product ID</th>
+              <th scope="col" class="text-orange">Image</th>
+              <th scope="col" class="text-orange">Product Name</th>
+              <th scope="col" class="text-orange">Product Desc</th>
+              <th scope="col" class="text-orange">Price</th>
+              <th scope="col" class="text-orange">Quantity</th>
+              <th scope="col" class="text-orange">Category ID</th>
+              <th scope="col" class="text-orange">Subcategory ID</th>
+              <th scope="col" class="text-orange">Is Active</th>
+              <th scope="col" class="text-orange">
+                <i class="bi bi-three-dots-vertical"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productList; index as i">
+              <th
+                class="text-orange"
+                (click)="showproductspec(i, item.prospecid)"
+              >
+                {{ i + 1 }}
+              </th>
+              <td scope="row" class="text-orange">{{ item.proid }}</td>
+              <td class="text-orange">
+                <img
+                  [src]="imageUrl + item.image"
+                  (error)="onImageError($event)"
+                  width="50"
+                />
+              </td>
+              <td class="text-orange">{{ item.proname }}</td>
+              <td class="text-orange">{{ item.prodesc }}</td>
+              <td class="text-orange">{{ item.price }}</td>
+              <td class="text-orange">{{ item.qty }}</td>
+              <td class="text-orange">
+                {{ getCategoryNameById(item.cateid) }}
+              </td>
+              <td class="text-orange">
+                {{ getSubcategoryNameById(item.subcateid) }}
+              </td>
+
+              <td class="text-orange">
+                <span class="activest" *ngIf="item.status === 1"> Active </span>
+                <span class="inactivest" *ngIf="item.status === 0">
+                  InActive
+                </span>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <span
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="color: #000000; cursor: pointer"
+                  >
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </span>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        (click)="GetProductById(item.proid, 1)"
+                        ><i class="bi bi-eye"></i> View</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        (click)="GetProductById(item.proid, 2)"
+                        ><i class="bi bi-pencil-square"></i> Edit</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal2"
+                        (click)="GetProductById(item.proid, 4)"
+                        ><i class="bi bi-image"></i> Upload Image</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal3"
+                        (click)="GetProductById(item.proid, 5)"
+                        ><i class="bi bi-card-text"></i> Add Product
+                        Specification</a
+                      >
+                    </li>
+
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        (click)="GetProductById(item.proid, 3)"
+                        ><i class="bi bi-eraser"></i> Remove</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Subcategory CRUD
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form [formGroup]="productForm">
+                <div class="modal-body">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Product ID"
+                      name="proid"
+                      formControlName="proid"
+                      readonly
+                    />
+                    <label for="floatingInput">Product ID</label>
+                  </div>
+                  <input
+                    type="input"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="Product Name"
+                    name="proname"
+                    formControlName="prospecid"
+                    hidden
+                  />
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Product Name"
+                      name="proname"
+                      formControlName="proname"
+                    />
+                    <label for="floatingInput">Product Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Product Desc"
+                      name="prodesc"
+                      formControlName="prodesc"
+                    />
+                    <label for="floatingInput">Product Desc</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Price"
+                      name="price"
+                      formControlName="price"
+                    />
+                    <label for="floatingInput">Price</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Quantity"
+                      name="qty"
+                      formControlName="qty"
+                    />
+                    <label for="floatingInput">Quantity</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="cateid"
+                      formControlName="cateid"
+                      (change)="filterSelect($event)"
+                    >
+                      <option value="" selected>Select Category</option>
+                      <option
+                        *ngFor="let i of categoryList"
+                        value="{{ i.cateid }}"
+                      >
+                        {{ i.catename }}
+                      </option>
+                    </select>
+                    <label for="floatingInput">Category</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="subcateid"
+                      formControlName="subcateid"
+                    >
+                      <option value="" selected>Select Subcategory</option>
+                      <option
+                        *ngFor="let i of subcategoryList"
+                        value="{{ i.subcateid }}"
+                      >
+                        {{ i.subcategory }}
+                      </option>
+                    </select>
+                    <label for="floatingInput">Subcategory</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="status"
+                      formControlName="status"
+                    >
+                      <option value="" selected>Select Status</option>
+                      <option value="0">In Active</option>
+                      <option value="1">Active</option>
+                    </select>
+                    <label for="floatingInput">Status</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    id="btnClose"
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="ProductSave()"
+                    *ngIf="btnSave"
+                  >
+                    Save changes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning"
+                    (click)="ProductEdit()"
+                    *ngIf="btnEdit"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="ProductRemove()"
+                    *ngIf="btnRemove"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div
+          class="modal fade"
+          id="exampleModal2"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Upload Image
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form [formGroup]="productForm">
+                <div class="modal-body">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="file"
+                      placeholder="Image"
+                      (change)="onFileSelected($event)"
+                    />
+                    <label for="floatingInput">Image</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    id="btnClose"
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="UploadImage()"
+                    *ngIf="btnUpload"
+                  >
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div
+          class="modal fade"
+          id="exampleModal3"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Product Specification
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form [formGroup]="productspecForm">
+                <div class="modal-body">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="ProspecID"
+                      name="price"
+                      formControlName="prospecid"
+                    />
+                    <label for="floatingInput">ProspecID</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Processor"
+                      name="price"
+                      formControlName="processor"
+                    />
+                    <label for="floatingInput">Processor</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Memory"
+                      name="price"
+                      formControlName="memory"
+                    />
+                    <label for="floatingInput">Memory</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Display"
+                      name="price"
+                      formControlName="display"
+                    />
+                    <label for="floatingInput">Display</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Storage"
+                      name="price"
+                      formControlName="storage"
+                    />
+                    <label for="floatingInput">Storage</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="WIFI"
+                      name="price"
+                      formControlName="wifi"
+                    />
+                    <label for="floatingInput">WIFI</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Videocard"
+                      name="price"
+                      formControlName="videocard"
+                    />
+                    <label for="floatingInput">Videocard</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Battery"
+                      name="price"
+                      formControlName="battery"
+                    />
+                    <label for="floatingInput">Battery</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Weight"
+                      name="price"
+                      formControlName="weight"
+                    />
+                    <label for="floatingInput">Weight</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Height"
+                      name="price"
+                      formControlName="height"
+                    />
+                    <label for="floatingInput">Height</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Width"
+                      name="price"
+                      formControlName="width"
+                    />
+                    <label for="floatingInput">Width</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Depth"
+                      name="price"
+                      formControlName="depth"
+                    />
+                    <label for="floatingInput">Depth</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Cablelength"
+                      name="price"
+                      formControlName="cablelength"
+                    />
+                    <label for="floatingInput">Cablelength</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Connectivity"
+                      name="price"
+                      formControlName="connectivity"
+                    />
+                    <label for="floatingInput">Connectivity</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="SYSRequirement"
+                      name="price"
+                      formControlName="sysrequirement"
+                    />
+                    <label for="floatingInput">SYSRequirement</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Chipset"
+                      name="price"
+                      formControlName="chipset"
+                    />
+                    <label for="floatingInput">Chipset</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="OnBoardGraphics"
+                      name="price"
+                      formControlName="onboardgraphics"
+                    />
+                    <label for="floatingInput">OnBoardGraphics</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Audio"
+                      name="price"
+                      formControlName="audio"
+                    />
+                    <label for="floatingInput">Audio</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Lan"
+                      name="price"
+                      formControlName="lan"
+                    />
+                    <label for="floatingInput">Lan</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="WirelessConnect"
+                      name="price"
+                      formControlName="wirelessconect"
+                    />
+                    <label for="floatingInput">WirelessConnect</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="ExpansionSlot"
+                      name="price"
+                      formControlName="expansionslot"
+                    />
+                    <label for="floatingInput">ExpansionSlot</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="StorageInterface"
+                      name="price"
+                      formControlName="storageinterface"
+                    />
+                    <label for="floatingInput">StorageInterface</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="USB"
+                      name="price"
+                      formControlName="usb"
+                    />
+                    <label for="floatingInput">USB</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Internalio"
+                      name="price"
+                      formControlName="internalio"
+                    />
+                    <label for="floatingInput">Internalio</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="BackpanelConnector"
+                      name="price"
+                      formControlName="backpanelconnector"
+                    />
+                    <label for="floatingInput">BackpanelConnector</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="IOController"
+                      name="price"
+                      formControlName="iocontroller"
+                    />
+                    <label for="floatingInput">IOController</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="BIOS"
+                      name="price"
+                      formControlName="bios"
+                    />
+                    <label for="floatingInput">BIOS</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="UniqueFeature"
+                      name="price"
+                      formControlName="uniquefeature"
+                    />
+                    <label for="floatingInput">UniqueFeature</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="OS"
+                      name="price"
+                      formControlName="os"
+                    />
+                    <label for="floatingInput">OS</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="DPI"
+                      name="price"
+                      formControlName="dpi"
+                    />
+                    <label for="floatingInput">DPI</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Refresh_Rate"
+                      name="price"
+                      formControlName="refresh_rate"
+                    />
+                    <label for="floatingInput">Refresh_Rate</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Panel_Type"
+                      name="price"
+                      formControlName="panel_type"
+                    />
+                    <label for="floatingInput">Panel_Type</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Resolution"
+                      name="price"
+                      formControlName="resolution"
+                    />
+                    <label for="floatingInput">Resolution</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Brightness"
+                      name="price"
+                      formControlName="brightness"
+                    />
+                    <label for="floatingInput">Brightness</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Warranty"
+                      name="price"
+                      formControlName="warranty"
+                    />
+                    <label for="floatingInput">Warranty</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="input"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="Barcode"
+                      name="price"
+                      formControlName="barcode"
+                    />
+                    <label for="floatingInput">Barcode</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    id="btnClose"
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="AddSpecification()"
+                    *ngIf="btnSpec"
+                  >
+                    Add Specification
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Sample JavaScript functions to maintain functionality
+
+      function SubcategoryRemove() {
+        if (confirm("Are you sure you want to remove this subcategory?")) {
+          alert("Subcategory removed successfully!");
+        }
+      }
+    </script>
+  </body>
+</html>

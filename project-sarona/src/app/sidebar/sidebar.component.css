@@ -1,0 +1,33 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 1rem;
+  color: #fff;
+  background-color: #343a40;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Or your actual sidebar width */
+  z-index: 1000;
+}
+
+/* Ensure the sidebar stays fixed on the left */
+/* .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  background-color: #343a40; 
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 1000;
+} */
+/* Sidebar styling */

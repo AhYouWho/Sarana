@@ -1,0 +1,202 @@
+<app-navbar [cartCount]="totalCart"></app-navbar>
+<main class="container mt-1 mb-1">
+  <div class="bg-white text-center fw-bold mt-5 p-5" *ngIf="totalCart == 0">
+    <h1>Cart is Empty !</h1>
+  </div>
+
+  <div class="row" *ngIf="totalCart > 0">
+    <div class="col-lg-8 col-12 cartBox mx-auto">
+      <strong
+        ><h1 class="mt-1 mb-3" style="font-size: xx-large">
+          Cart Item !
+        </h1></strong
+      >
+
+      <form>
+        <!-- cart content  -->
+        <div
+          class="cart-item w-100 d-flex flex-column align-items-center"
+          *ngFor="let cartdata of getCartData"
+        >
+          <div
+            class="row w-100 align-items-center"
+            *ngFor="let data of cartdata.product"
+          >
+            <div
+              class="col-lg-2 d-flex align-items-center justify-content-center"
+            >
+              <img
+                [src]="imageUrl + data.image"
+                (error)="onImageError($event)"
+                class="product-image img-fluid"
+                style="max-width: 500px"
+              />
+            </div>
+            <div class="col-lg-10 product-detail ps-lg-5">
+              <h5>{{ data.proname }}</h5>
+              <p class="mt-2 mb-1">
+                <span><i class="bi-currency-dollar me-1"></i></span>
+                {{ data.price | number }}
+              </p>
+
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="removeCart(cartdata.cartID)"
+              >
+                <i class="bi bi-trash"></i> Remove
+              </button>
+
+              <div class="mt-2 mb-2">
+                <button
+                  class="btn btn-sm btn-dark"
+                  [disabled]="cartdata.qty > 1 ? false : true"
+                  (click)="minusQty(cartdata)"
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  class="col-lg-1 text-center"
+                  value="{{ cartdata.qty }}"
+                  disabled
+                />
+                <button class="btn btn-sm btn-dark" (click)="addQty(cartdata)">
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg-4 col-12 mt-5">
+      <!-- price content  -->
+      <div class="priceBox">
+        <h5 class="fw-bold">Price Details</h5>
+        <hr />
+        <p class="mt-2 mb-2">
+          <span class="float-start">Price({{ totalCart }})</span>
+          <span class="float-end"
+            ><i class="bi bi-currency-dollar"></i>
+            {{ totalAmount | number }}</span
+          >
+        </p>
+        <div class="clearfix"></div>
+        <p class="mt-2 mb-2">
+          <span class="float-start">Delivery</span>
+          <span class="float-end">Free</span>
+        </p>
+        <div class="clearfix"></div>
+        <hr />
+        <p class="mt-2 mb-2 fw-bold">
+          <span class="float-start">Total Amount</span>
+          <span class="float-end">
+            <i class="bi bi-currency-dollar"></i>
+            {{ totalAmount | number }}</span
+          >
+        </p>
+        <div class="clearfix mb-5"></div>
+
+        <button
+          type="button"
+          class="btn btn-md btn-warning col-12"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-whatever="@getbootstrap"
+        >
+          Place order <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal  -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Order</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="orderForm">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label"
+                >Address Line</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                formControlName="addressline"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                formControlName="city"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Country</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                formControlName="country"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Zipcode</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                formControlName="zipcode"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <h5>Total Amount : $ {{ this.totalAmount | number }}</h5>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning"
+            [disabled]="orderForm.invalid"
+            (click)="orderClick()"
+          >
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

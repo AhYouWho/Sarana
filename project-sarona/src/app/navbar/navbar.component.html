@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <div class="navbar-left">
+    <span class="logo">PN Computer</span>
+  </div>
+
+  <div class="navbar-center">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <div class="navbar-right">
+    <a href="/cart">
+      <i class="bi bi-cart3"></i>
+      <span class="cartCount">{{ cartCount }}</span>
+    </a>
+
+    <a routerLink="/login" (click)="Logout()"
+      ><i class="fa-solid fa-right-from-bracket"></i
+    ></a>
+  </div>
+</nav>
