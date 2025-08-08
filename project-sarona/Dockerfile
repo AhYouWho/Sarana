@@ -1,9 +1,12 @@
-FROM node:18 AS build
+# Build Angular app
+FROM node:18-alpine as build
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm install
+COPY . .
 RUN npm run build --prod
 
+# Serve with Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist/your-angular-project /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/project-sarona /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf

@@ -1,25 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  private api = environment.apiUrl;
   constructor(private http: HttpClient) {}
   register(data: any) {
-    return this.http.post<any>(
-      'https://localhost:7276/api/User/register',
-      data
-    );
+    return this.http.post<any>(`${this.api}/User/register`, data);
   }
   getUser() {
-    return this.http.get<any>('https://localhost:7276/api/User/user');
+    return this.http.get<any>(`${this.api}/User/user`);
   }
   login(data: any) {
-    return this.http.post<any>('https://localhost:7276/api/User/login', data);
+    return this.http.post<any>(`${this.api}/User/login`, data, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true,
+    });
   }
   logout() {
-    return this.http.post<any>('https://localhost:7276/api/User/logout', '');
+    return this.http.post<any>(`${this.api}/User/logout`, '');
   }
 
   getUserInfo(): any {
@@ -36,23 +38,18 @@ export class UserService {
     return null;
   }
   getUserList() {
-    return this.http.post<any>('https://localhost:7276/api/get-user', null);
+    return this.http.post<any>(`${this.api}/get-user`, null);
   }
   getUserById(UserId: number) {
-    return this.http.get<any>(
-      'https://localhost:7276/api/get-user-by-id/' + UserId
-    );
+    return this.http.get<any>(`${this.api}/get-user-by-id/` + UserId);
   }
   addUser(data: any) {
-    return this.http.post<any>(
-      'https://localhost:7276/api/User/register',
-      data
-    );
+    return this.http.post<any>(`${this.api}/User/register`, data);
   }
   editUser(data: any) {
-    return this.http.post<any>('https://localhost:7276/api/edit-user', data);
+    return this.http.post<any>(`${this.api}/edit-user`, data);
   }
   removeUser(data: any) {
-    return this.http.post<any>('https://localhost:7276/api/remove-user', data);
+    return this.http.post<any>(`${this.api}/remove-user`, data);
   }
 }

@@ -45,8 +45,8 @@ namespace Ecommerce_Back_End.Controllers
                 return Ok(new
                 {
                     status = "Error",
-                    message = ex.Message
-
+                    message = ex.Message,
+                    inner = ex.InnerException?.Message
 
                 });
             }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NROh5yMTN1GfYOh3IlR0yYmeFEkO4KBQgiezrvkgHvk=",
+  "Hash": "J3JY4YpCzHOj0SQo4Dk5BnYB4aUIlBCTvBb8kbzgTbw=",
   "Source": "Ecommerce_Back_End",
   "BasePath": "_content/Ecommerce_Back_End",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\258e7d7a-c229-40b4-8bff-087c90a73b54.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\wwwroot\\Images\\26aff05f-d33f-4a8b-9f4c-ba8506b6d126.png",
+      "SourceId": "Ecommerce_Back_End",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\wwwroot\\",
+      "BasePath": "_content/Ecommerce_Back_End",
+      "RelativePath": "Images/26aff05f-d33f-4a8b-9f4c-ba8506b6d126.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\26aff05f-d33f-4a8b-9f4c-ba8506b6d126.png"
     },
     {
       "Identity": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\wwwroot\\Images\\46a65745-0dad-40c0-8c89-d79024a8bb7e.jpg",

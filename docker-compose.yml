@@ -1,13 +1,54 @@
-version: '3'
+version: "3.9"
+
 services:
-  backend:
-    build: ./backend
+  oracle-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: oracle-db
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      - ORACLE_PWD=${ORACLE_PASSWORD}
+      - ORACLE_CHARACTERSET=AL32UTF8
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "echo 'SELECT 1 FROM DUAL;' | sqlplus -s system/12345@localhost:1521/XEPDB1 || exit 1",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+
+  backend-api:
+    build:
+      context: ./Ecommerce_Back_End
+      dockerfile: Dockerfile
+    container_name: backend-app
     ports:
       - "5000:80"
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "80:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=User Id=system;Password=12345;Data Source=oracle-db:1521/XEPDB1
     depends_on:
-      - backend
+      oracle-db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend-app:
+    build:
+      context: ./project-sarona
+      dockerfile: Dockerfile
+    container_name: frontend-app
+    ports:
+      - "4200:80"
+    environment:
+      - API_URL=http://backend-api:80
+    depends_on:
+      - backend-api
+    restart: unless-stopped
+
+volumes:
+  oracle-data:

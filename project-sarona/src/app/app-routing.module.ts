@@ -17,6 +17,7 @@ import { SubcategoryCudComponent } from './subcategory-cud/subcategory-cud.compo
 import { UserCudComponent } from './user-cud/user-cud.component';
 import { RegisterComponent } from './register/register.component';
 import { OrderCudComponent } from './order-cud/order-cud.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,22 +25,47 @@ const routes: Routes = [
     path: 'product-detail/:name/:id',
     component: ProductDetailsComponent,
   },
-  { path: 'product-page/:name', component: ProductPageComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: '', component: HomeComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'wishlist', component: WishlistComponent },
-  { path: 'testing', component: TesthtmlComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'payment/success', component: PaymentSuccessComponent },
-  { path: 'payment/success/invoice', component: InvoiceComponent },
-  { path: 'product-cud', component: ProductCudComponent },
-  { path: 'subcategory-cud', component: SubcategoryCudComponent },
-  { path: 'user-cud', component: UserCudComponent },
+  {
+    path: 'product-page/:name',
+    component: ProductPageComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'testing', component: TesthtmlComponent, canActivate: [AuthGuard] },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+  {
+    path: 'payment/success',
+    component: PaymentSuccessComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'payment/success/invoice',
+    component: InvoiceComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'product-cud',
+    component: ProductCudComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'subcategory-cud',
+    component: SubcategoryCudComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'user-cud', component: UserCudComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'order-cud', component: OrderCudComponent },
-  { path: 'product-page/:name/:subcateid', component: ProductPageComponent },
+  { path: 'order-cud', component: OrderCudComponent, canActivate: [AuthGuard] },
+  {
+    path: 'product-page/:name/:subcateid',
+    component: ProductPageComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

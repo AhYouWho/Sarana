@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
   userinfo: any;
+  userToken: any;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -30,8 +31,11 @@ export class LoginComponent implements OnInit {
 
         if (res.status === 'Succeed') {
           this.userinfo = res.user;
+          this.userToken = res.jwt;
+          let token = JSON.stringify(res.jwt);
           let userdata = JSON.stringify(this.userinfo);
           localStorage.setItem('user', userdata);
+          localStorage.setItem('usertoken', token);
           if (this.userinfo.usertype == 'admin') {
             this.messageService.doMessage(res.status, res.message, 'Login!');
             this.router.navigate(['/product-cud']);

@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { SharedService } from '../service/shared.service';
 import { CartComponent } from '../cart/cart.component';
-
+import { environment } from 'src/environments/environment';
 declare const QRCode: any;
 declare const bootstrap: any;
 
@@ -35,6 +35,7 @@ export class PaymentComponent implements AfterViewInit, OnInit, OnDestroy {
   checkTransactionInterval: any;
   private duration: number = 300; // total seconds (2 minutes)
   private timerInterval: any;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private bakongService: BakongService,
@@ -141,94 +142,158 @@ export class PaymentComponent implements AfterViewInit, OnInit, OnDestroy {
       console.error('Md5 value is not available.');
       return;
     }
-
+    console.log('MD5 sent:', md5Value);
     this.checkTransactionInterval = window.setInterval(() => {
       this.fetchTransactionStatus(md5Value, orderNumber);
     }, 5000);
   };
 
-  fetchTransactionStatus = async (
+  // fetchTransactionStatus = async (
+  //   md5: string,
+  //   orderNumber: string
+  // ): Promise<void> => {
+  //   const token =
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMDAzYWYxYzUwMzljNDk5YSJ9LCJpYXQiOjE3NTM1OTgxNTUsImV4cCI6MTc2MTM3NDE1NX0.4x7U5TS9KHXbLSylTR4t9BzEpmppZkwCcFT1DJz3wnM'; // Replace securely
+  //   const url = `${environment.bakongApiUrl}/v1/check_transaction_by_md5`;
+
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ md5 }),
+  //     });
+
+  //     const data = await response.json();
+  //     if (!response.ok) {
+  //       const errorData = await response.json().catch(() => ({}));
+  //       console.error(`HTTP error! Status: ${response.status}`, errorData);
+  //       clearInterval(this.checkTransactionInterval);
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
+
+  //     if (data.responseCode === 0 && data.responseMessage === 'Success') {
+  //       console.log('Paid');
+  //       clearInterval(this.checkTransactionInterval);
+
+  //       const telegramBotToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+  //       const chatId = 'YOUR_CHAT_ID';
+  //       const message = `Order #${orderNumber} has been successfully processed.`;
+
+  //       // try {
+  //       //   const telegramResponse = await fetch(
+  //       //     `https://api.telegram.org/bot${telegramBotToken}/sendMessage`,
+  //       //     {
+  //       //       method: 'POST',
+  //       //       headers: { 'Content-Type': 'application/json' },
+  //       //       body: JSON.stringify({ chat_id: chatId, text: message }),
+  //       //     }
+  //       //   );
+
+  //       //   const telegramData = await telegramResponse.json();
+  //       //   console.log('Telegram notification sent:', telegramData);
+  //       // } catch (telegramError) {
+  //       //   console.error('Error sending Telegram notification:', telegramError);
+  //       // }
+
+  //       console.log('orderNumber', orderNumber);
+  //       this.orderService.confirmpayment(orderNumber).subscribe((res) => {
+  //         if (res.status === 'Succeed') {
+  //           console.log('Done Updated');
+  //           this.sharedService.updateValue(res.order);
+  //           const modalEl = document.getElementById('qrCodeModal');
+  //           if (modalEl) {
+  //             const qrCodeModal = bootstrap.Modal.getInstance(modalEl);
+  //             if (qrCodeModal) {
+  //               qrCodeModal.hide();
+  //             }
+
+  //             // Remove modal backdrop if it’s still in the DOM
+  //             const backdrop = document.querySelector('.modal-backdrop');
+  //             if (backdrop) {
+  //               backdrop.parentNode?.removeChild(backdrop);
+  //             }
+
+  //             // Remove 'modal-open' class from body
+  //             document.body.classList.remove('modal-open');
+  //             document.body.style.removeProperty('padding-right');
+  //           }
+  //           this.router.navigate(['/payment/success']);
+  //         }
+  //       });
+  //     } else if (
+  //       data.responseCode === 1 &&
+  //       data.responseMessage === 'Transaction failed.'
+  //     ) {
+  //       console.log('Transaction failed as per API response.');
+  //       clearInterval(this.checkTransactionInterval);
+  //     } else if (
+  //       data.responseCode === 1 &&
+  //       data.responseMessage ===
+  //         'Transaction could not be found. Please check and try again.'
+  //     ) {
+  //       console.log(
+  //         'Transaction not found as per API response. Continuing to poll.'
+  //       );
+  //     } else {
+  //       console.log('Transaction status unknown or unexpected response:', data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking transaction status:', error);
+  //     clearInterval(this.checkTransactionInterval);
+  //   }
+  // };
+  async fetchTransactionStatus(
     md5: string,
     orderNumber: string
-  ): Promise<void> => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMDAzYWYxYzUwMzljNDk5YSJ9LCJpYXQiOjE3NDgyNTg3MzksImV4cCI6MTc1NjAzNDczOX0.wBeKGLg4qKVF9SNU07cnWHaEu2IKBlCKTHuFxAYydz8'; // Replace securely
-    const url = 'https://api-bakong.nbc.gov.kh/v1/check_transaction_by_md5';
-
+  ): Promise<void> {
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ md5 }),
-      });
+      this.bakongService.checkTransaction(md5).subscribe({
+        next: (data: any) => {
+          if (data.responseCode === 0 && data.responseMessage === 'Success') {
+            console.log('Paid');
+            console.log('Paid');
+            clearInterval(this.checkTransactionInterval);
+            console.log('orderNumber', orderNumber);
+            this.orderService.confirmpayment(orderNumber).subscribe((res) => {
+              if (res.status === 'Succeed') {
+                console.log('Done Updated');
+                this.sharedService.updateValue(res.order);
+                const modalEl = document.getElementById('qrCodeModal');
+                if (modalEl) {
+                  const qrCodeModal = bootstrap.Modal.getInstance(modalEl);
+                  if (qrCodeModal) {
+                    qrCodeModal.hide();
+                  }
 
-      const data = await response.json();
+                  // Remove modal backdrop if it’s still in the DOM
+                  const backdrop = document.querySelector('.modal-backdrop');
+                  if (backdrop) {
+                    backdrop.parentNode?.removeChild(backdrop);
+                  }
 
-      if (data.responseMessage === 'Success') {
-        console.log('Paid');
-        clearInterval(this.checkTransactionInterval);
-
-        const telegramBotToken = 'YOUR_TELEGRAM_BOT_TOKEN';
-        const chatId = 'YOUR_CHAT_ID';
-        const message = `Order #${orderNumber} has been successfully processed.`;
-
-        // try {
-        //   const telegramResponse = await fetch(
-        //     `https://api.telegram.org/bot${telegramBotToken}/sendMessage`,
-        //     {
-        //       method: 'POST',
-        //       headers: { 'Content-Type': 'application/json' },
-        //       body: JSON.stringify({ chat_id: chatId, text: message }),
-        //     }
-        //   );
-
-        //   const telegramData = await telegramResponse.json();
-        //   console.log('Telegram notification sent:', telegramData);
-        // } catch (telegramError) {
-        //   console.error('Error sending Telegram notification:', telegramError);
-        // }
-
-        try {
-          console.log('orderNumber', orderNumber);
-          this.orderService.confirmpayment(orderNumber).subscribe((res) => {
-            if (res.status === 'Succeed') {
-              console.log('Done Updated');
-              this.sharedService.updateValue(res.order);
-              const modalEl = document.getElementById('qrCodeModal');
-              if (modalEl) {
-                const qrCodeModal = bootstrap.Modal.getInstance(modalEl);
-                if (qrCodeModal) {
-                  qrCodeModal.hide();
+                  // Remove 'modal-open' class from body
+                  document.body.classList.remove('modal-open');
+                  document.body.style.removeProperty('padding-right');
                 }
-
-                // Remove modal backdrop if it’s still in the DOM
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) {
-                  backdrop.parentNode?.removeChild(backdrop);
-                }
-
-                // Remove 'modal-open' class from body
-                document.body.classList.remove('modal-open');
-                document.body.style.removeProperty('padding-right');
+                this.router.navigate(['/payment/success']);
               }
-              this.router.navigate(['/payment/success']);
-            }
-          });
-        } catch (updateError) {
-          console.error('Error updating order status:', updateError);
-        }
-      } else {
-        console.log('Transaction status unknown.');
-      }
+            });
+          } else {
+            // handle other cases
+            console.log('Transaction status:', data);
+          }
+        },
+        error: (error) => {
+          console.error('Error checking transaction status:', error);
+        },
+      });
     } catch (error) {
-      console.error('Error checking transaction status:', error);
-      clearInterval(this.checkTransactionInterval);
+      console.error('Unexpected error:', error);
     }
-  };
-
+  }
   startCountdown() {
     this.timerInterval = setInterval(() => {
       const minutes = Math.floor(this.duration / 60);

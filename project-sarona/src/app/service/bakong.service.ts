@@ -1,12 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 declare const BakongKHQR: any;
 @Injectable({
   providedIn: 'root',
 })
 export class BakongService {
   private khqrInstance: any;
-
-  constructor() {
+  private api = environment.apiUrl;
+  constructor(private http: HttpClient) {
     if (typeof BakongKHQR === 'undefined') {
       console.error('BakongKHQR library is not loaded.');
       return;
@@ -58,5 +60,11 @@ export class BakongService {
     );
 
     return this.khqrInstance.generateIndividual(individualInfo);
+  }
+
+  checkTransaction(md5: string) {
+    return this.http.post(`${this.api}/payment/bakong/transaction-status`, {
+      md5,
+    });
   }
 }

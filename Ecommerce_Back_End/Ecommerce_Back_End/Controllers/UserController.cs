@@ -77,32 +77,55 @@ namespace Ecommerce_Back_End.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login(UserDto request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.USERNAME == request.USERNAME);
-
-            if (user == null) return BadRequest(new { message = "Invalid Credentials", status = "Error", });
-
-            if (!BCrypt.Net.BCrypt.Verify(request.PASSWORD, user.PASSWORD))
+            try
             {
-                return BadRequest(new { message = "Invalid Credentials",status = "Error" });
+                if (request == null || string.IsNullOrWhiteSpace(request.USERNAME) || string.IsNullOrWhiteSpace(request.PASSWORD))
+                {
+                    return BadRequest(new { message = "Invalid input data", status = "Error" });
+                }
+
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.USERNAME == request.USERNAME);
+
+                if (user == null)
+                {
+                    return BadRequest(new { message = "Invalid Credentials", status = "Error" });
+                }
+
+                if (!BCrypt.Net.BCrypt.Verify(request.PASSWORD, user.PASSWORD))
+                {
+                    return BadRequest(new { message = "Invalid Credentials", status = "Error" });
+                }
+
+                var jwt = _jwtService.Generate(user.USERID);
+
+                Response.Cookies.Append("jwt", jwt, new CookieOptions
+                {
+                    HttpOnly = true
+                });
+
+                var token = _jwtService.Verify(jwt);
+                int userId = int.Parse(token.Issuer);
+                var userinfo = await _context.Users.FirstOrDefaultAsync(x => x.USERID == userId);
+
+                return Ok(new
+                {
+                    status = "Succeed",
+                    jwt = jwt,
+                    message = "Login Successful!",
+                    user = userinfo,
+                });
             }
-
-            var jwt = _jwtService.Generate(user.USERID);
-
-            Response.Cookies.Append("jwt", jwt, new CookieOptions
+            catch (Exception ex)
             {
-                HttpOnly = true
-            });
-            var token = _jwtService.Verify(jwt);
-            int userId = int.Parse(token.Issuer);
-            var userinfo = await _context.Users.FirstOrDefaultAsync(x => x.USERID == userId);
-            return Ok(new
-            {
-                status = "Succeed",
-                jwt = jwt,
-                message = "Login Successful!",
-                user = userinfo,
-            });
+                return StatusCode(500, new
+                {
+                    status = "Error",
+                    message = "Internal Server Error",
+                    detail = ex.Message // for debugging
+                });
+            }
         }
+
 
         [HttpGet("user")]
         public async Task<ActionResult> User()

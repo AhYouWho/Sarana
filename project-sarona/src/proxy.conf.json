@@ -1,0 +1,11 @@
+{
+  "/v1": {
+    "target": "https://api-bakong.nbc.gov.kh",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMDAzYWYxYzUwMzljNDk5YSJ9LCJpYXQiOjE3NTM1OTgxNTUsImV4cCI6MTc2MTM3NDE1NX0.4x7U5TS9KHXbLSylTR4t9BzEpmppZkwCcFT1DJz3wnM"
+    }
+  }
+}

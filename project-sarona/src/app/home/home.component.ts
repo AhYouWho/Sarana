@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     this.getCategorisData = this.getData.categoriesData;
     this.getUser = localStorage.getItem('user');
     this.getUser = JSON.parse(this.getUser);
+    console.log('this.getUser',this.getUser)
     this.subcategoryService.getSubcategoryList().subscribe((res: any) => {
       if (res.status === 'Succeed') {
         this.getSubcategoryList = res.subcategory;
