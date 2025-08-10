@@ -8,7 +8,7 @@ namespace Ecommerce_Back_End
         protected override void OnConfiguring(DbContextOptionsBuilder opt)
         {
             //opt.UseOracle("User Id = teababc; Password = 123; Data Source = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA = (SERVER = dedicated)(SID = xe)))");
-            opt.UseOracle("User Id=teababc;Password=123;Data Source=oracle-db:1521/xe");
+            opt.UseOracle("User Id=teababc;Password=123;Data Source=oracle-db:1521/XEPDB1");
             //opt.UseOracle("User Id=teababc;Password=123;Data Source=localhost:1521/XEPDB1");
 
 
