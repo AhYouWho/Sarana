@@ -2,25 +2,15 @@ version: "3.9"
 
 services:
   oracle-db:
-    image: wnameless/oracle-xe-11g:latest
+    image: wnameless/oracle-xe-11g
     container_name: oracle-db
     ports:
       - "1521:1521"
-      - "5500:5500"
+      - "8080:8080"
     environment:
-      - ORACLE_PWD=${ORACLE_PASSWORD}
-      - ORACLE_CHARACTERSET=AL32UTF8
+      - ORACLE_PWD=12345
     volumes:
-      - oracle-data:/opt/oracle/oradata
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "echo 'SELECT 1 FROM DUAL;' | sqlplus -s system/12345@localhost:1521/XEPDB1 || exit 1",
-        ]
-      interval: 10s
-      timeout: 10s
-      retries: 10
+      - oracle-data:/u01/app/oracle
     restart: unless-stopped
 
   backend-api:
@@ -31,10 +21,9 @@ services:
     ports:
       - "5000:80"
     environment:
-      - ConnectionStrings__DefaultConnection=User Id=system;Password=12345;Data Source=oracle-db:1521/XEPDB1
+      - ConnectionStrings__DefaultConnection=User Id=system;Password=12345;Data Source=oracle-db:1521/xe
     depends_on:
-      oracle-db:
-        condition: service_healthy
+      - oracle-db
     restart: unless-stopped
 
   frontend-app:
