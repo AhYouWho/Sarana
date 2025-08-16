@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FK9PzbD+X2jEpafMtGtGvwbuCmOBV7lEZilaIPceU6tmepfB4Rw+QijU8M72zHbVF/jgMIfKfxZOaO5ge0a1fw==",
+  "dgSpecHash": "ncuovYq7ZO4iyzUv+JH3uqGG9H4lytesYeEkVkz6V271LkEBcSTubn+W9L06tZPfWXNjMWApg0ulrP1Rv829Pw==",
   "success": true,
   "projectFilePath": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,8 @@
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\npgsql\\6.0.8\\npgsql.6.0.8.nupkg.sha512",
+    "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.8\\npgsql.entityframeworkcore.postgresql.6.0.8.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\oracle.entityframeworkcore\\7.21.13\\oracle.entityframeworkcore.7.21.13.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\oracle.manageddataaccess.core\\3.21.130\\oracle.manageddataaccess.core.3.21.130.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",

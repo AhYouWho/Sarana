@@ -5,6 +5,7 @@ import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from '../service/message.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -27,7 +28,7 @@ export class CartComponent implements OnInit {
   productonly: any;
   totalAmount: number = 0;
   totalCart: number = 0;
-  imageUrl: string = 'https://localhost:7276/Images/';
+  imageUrl: String = environment.imageUrl + '/Images/';
   orderForm = new FormGroup({
     addressline: new FormControl(''),
     city: new FormControl(''),

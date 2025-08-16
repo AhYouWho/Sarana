@@ -4,6 +4,7 @@ import { SubcategoryService } from '../service/subcategory.service';
 import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { MessageService } from '../service/message.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit {
   getCartData: any = [];
   getUser: any;
   cartCount: any;
-  imageUrl: string = 'https://localhost:7276/Images/';
+  imageUrl: String = environment.imageUrl + '/Images/';
+
   p: number = 1;
 
   constructor(
@@ -50,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.getCategorisData = this.getData.categoriesData;
     this.getUser = localStorage.getItem('user');
     this.getUser = JSON.parse(this.getUser);
-    console.log('this.getUser',this.getUser)
+    console.log('this.getUser', this.getUser);
     this.subcategoryService.getSubcategoryList().subscribe((res: any) => {
       if (res.status === 'Succeed') {
         this.getSubcategoryList = res.subcategory;

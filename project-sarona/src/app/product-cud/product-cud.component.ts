@@ -12,6 +12,7 @@ import { SubcategoryService } from '../service/subcategory.service';
 import { DataTableDirective } from 'angular-datatables';
 import { ProductService } from '../service/product.service';
 import { CategoryService } from '../service/category.service';
+import { environment } from 'src/environments/environment';
 declare const $: any;
 @Component({
   selector: 'app-product-cud',
@@ -22,7 +23,8 @@ export class ProductCudComponent implements OnInit, OnDestroy, AfterViewInit {
   private dtInstance: any;
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  imageUrl: string = 'https://localhost:7276/Images/';
+  imageUrl: String = environment.imageUrl + '/Images/';
+
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
   selectedFile: File | null = null;

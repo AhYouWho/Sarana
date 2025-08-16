@@ -7,6 +7,7 @@ import { CartService } from '../service/cart.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from '../service/message.service';
 import { SubcategoryService } from '../service/subcategory.service';
+import { environment } from 'src/environments/environment';
 interface Product {
   proid: number;
   proname: string;
@@ -39,7 +40,7 @@ export class ProductDetailsComponent implements OnInit {
     private subcategoryService: SubcategoryService
   ) {}
 
-  imageUrl: string = 'https://localhost:7276/Images/';
+  imageUrl: String = environment.imageUrl + '/Images/';
   getParamValue: any;
   getProductDetails: any;
   storeCartData: any = [];

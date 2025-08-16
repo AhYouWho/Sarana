@@ -4,7 +4,7 @@ import { GetDataService } from 'src/app/service/get-data.service';
 import { ProductService } from '../service/product.service';
 import { CartService } from '../service/cart.service';
 import { MessageService } from '../service/message.service';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
@@ -24,7 +24,7 @@ export class ProductPageComponent implements OnInit {
   p: number = 1;
   searchText: string = '';
 
-  imageUrl: string = 'https://localhost:7276/Images/';
+  imageUrl: String = environment.imageUrl + '/Images/';
 
   constructor(
     private route: ActivatedRoute,

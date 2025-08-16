@@ -24,7 +24,7 @@ export class ProductService {
     return this.http.post<any>(`${this.api}/add-product`, data);
   }
   uploadImage(data: any) {
-    return this.http.post<any>(`${this.api}/add-imag`, data);
+    return this.http.post<any>(`${this.api}/add-image`, data);
   }
   getProductById(productId: any) {
     return this.http.get<any>(`${this.api}/get-product-by-id/` + productId);
