@@ -9,7 +9,7 @@ namespace Ecommerce_Back_End
         {
             //opt.UseOracle("User Id = teababc; Password = 123; Data Source = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA = (SERVER = dedicated)(SID = xe)))");
             // opt.UseOracle("User Id=teababc;Password=123;Data Source=oracle-db:1521/XEPDB1");
-            opt.UseNpgsql("Host=postgres-db;Port=5432;Database=ecommerce;Username=postgres;Password=12345");
+            opt.UseNpgsql("Host=postgres-db;Port=5432;Database=ecommerce;Username=appuser;Password=12345");
 
             //opt.UseOracle("User Id=teababc;Password=123;Data Source=localhost:1521/XEPDB1");
 
