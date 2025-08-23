@@ -1,6 +1,7 @@
 using Ecommerce_Back_End;
 using Ecommerce_Back_End.Model.Helper;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -96,7 +97,7 @@ app.UseAuthorization();
 app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<EcommerceDbContext>();
     db.Database.Migrate();
 }
 
