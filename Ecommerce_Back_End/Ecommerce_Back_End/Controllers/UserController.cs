@@ -14,10 +14,12 @@ namespace Ecommerce_Back_End.Controllers
     {
         private readonly EcommerceDbContext _context;
         private readonly JwtService _jwtService;
-        public UserController(EcommerceDbContext context, JwtService jwtService)
+        private readonly ILogger<UserController> _logger;
+        public UserController(EcommerceDbContext context, JwtService jwtService, ILogger<UserController> logger)
         {
             _context = context;
             _jwtService = jwtService;
+            _logger = logger;
         }
         [HttpPost("register")]
         public async Task<ActionResult> Register(UserRequest request)
@@ -61,15 +63,12 @@ namespace Ecommerce_Back_End.Controllers
                 });
             }
 
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                return Ok(new
-                {
-                    status = "Error",
-                    message = ex.Message
+                // Log the full exception including inner exception
+                _logger.LogError(ex, "Error saving entity: {Inner}", ex.InnerException?.Message);
 
-
-                });
+                return BadRequest(new { message = ex.InnerException?.Message ?? ex.Message });
             }
             
         }
