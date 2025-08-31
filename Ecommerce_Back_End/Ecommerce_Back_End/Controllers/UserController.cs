@@ -47,8 +47,8 @@ namespace Ecommerce_Back_End.Controllers
                     DOB = request.DOB,
                     PHONE = request.PHONE,
                     USERTYPE = request.USERTYPE,
-                    CREATEDATE = DateTime.Now,
-                    MODIFIEDDATE = DateTime.Now,
+                    CREATEDATE = DateTime.UtcNow,
+                    MODIFIEDDATE = DateTime.UtcNow,
 
                 };
 
@@ -232,7 +232,7 @@ namespace Ecommerce_Back_End.Controllers
                     PHONE = request.PHONE,
                     USERTYPE = request.USERTYPE,
                     CREATEDATE = userExist.CREATEDATE,
-                    MODIFIEDDATE = DateTime.Now,
+                    MODIFIEDDATE = DateTime.UtcNow,
 
                 };
                 _context.Users.Update(user);
@@ -285,7 +285,7 @@ namespace Ecommerce_Back_End.Controllers
                     PHONE = userExist.PHONE,
                     USERTYPE = userExist.USERTYPE,
                     CREATEDATE = userExist.CREATEDATE,
-                    MODIFIEDDATE = DateTime.Now,
+                    MODIFIEDDATE = DateTime.UtcNow,
                 };
 
                 _context.Users.Remove(user);
