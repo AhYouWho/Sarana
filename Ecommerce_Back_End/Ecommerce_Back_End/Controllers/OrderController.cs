@@ -82,8 +82,8 @@ namespace Ecommerce_Back_End.Controllers
                         ADDRESSLINE = request.ADDRESSLINE,
                         CITY = request.CITY,
                         COUNTRY = request.COUNTRY,  
-                        CREATEDATE = DateTime.Now,
-                        MODIFIEDDATE = DateTime.Now,
+                        CREATEDATE = DateTime.UtcNow,
+                        MODIFIEDDATE = DateTime.UtcNow,
                     };
                     
                     await _context.Orders.AddAsync(order);
@@ -176,7 +176,7 @@ namespace Ecommerce_Back_End.Controllers
 
                     // Directly update loaded entities
                     item.STATUS = "Paid";
-                    item.MODIFIEDDATE = DateTime.Now;
+                    item.MODIFIEDDATE = DateTime.UtcNow;
                     productExist.QTY -= item.QTY;
 
                     var cart = await _context.Cart.FirstOrDefaultAsync(c =>

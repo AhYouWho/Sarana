@@ -37,8 +37,8 @@ namespace Ecommerce_Back_End.Controllers
                         PROID = request.PROID,
                         USERID = request.USERID,
                         QTY = request.QTY,
-                        CREATEDATE = DateTime.Now,
-                        MODIFIEDDATE = DateTime.Now,
+                        CREATEDATE = DateTime.UtcNow,
+                        MODIFIEDDATE = DateTime.UtcNow,
 
                     };
                     await _context.Cart.AddAsync(cart);
@@ -129,7 +129,7 @@ namespace Ecommerce_Back_End.Controllers
                     USERID = request.USERID,
                     PROID= request.PROID,
                     QTY = request.QTY,
-                    MODIFIEDDATE = DateTime.Now,
+                    MODIFIEDDATE = DateTime.UtcNow,
                 };
                 _context.Cart.Update(cart);
                 await _context.SaveChangesAsync();

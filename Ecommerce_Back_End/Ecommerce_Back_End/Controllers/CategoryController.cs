@@ -29,8 +29,8 @@ namespace Ecommerce_Back_End.Controllers
                     CATENAME = request.CATENAME,
                     CATEDESC = request.CATEDESC,
                     STATUS = 1,
-                    CREATEDATE = DateTime.Now,
-                    MODIFIEDDATE = DateTime.Now,
+                    CREATEDATE = DateTime.UtcNow,
+                    MODIFIEDDATE = DateTime.UtcNow,
                     DELETEDDATE = null
                 };
                 await _context.categories.AddAsync(category);
@@ -125,7 +125,7 @@ namespace Ecommerce_Back_End.Controllers
                     CATEDESC = request.CATEDESC,
                     STATUS = categoryExist.STATUS,
                     CREATEDATE = categoryExist.CREATEDATE,
-                    MODIFIEDDATE = DateTime.Now,
+                    MODIFIEDDATE = DateTime.UtcNow,
                     DELETEDDATE = null
                 };
                 _context.categories.Update(category);
@@ -175,7 +175,7 @@ namespace Ecommerce_Back_End.Controllers
                     STATUS = 0,
                     CREATEDATE = categoryExist.CREATEDATE,
                     MODIFIEDDATE = categoryExist.MODIFIEDDATE,
-                    DELETEDDATE = DateTime.Now
+                    DELETEDDATE = DateTime.UtcNow
                 };
                 
                 _context.categories.Remove(category);

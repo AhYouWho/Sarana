@@ -64,7 +64,7 @@ namespace Ecommerce_Back_End.Controllers
 
                 // Update product
                 productExist.IMAGE = newimage;
-                productExist.MODIFIEDDATE = DateTime.Now;
+                productExist.MODIFIEDDATE = DateTime.UtcNow;
 
                 _context.Product.Update(productExist);
                 await _context.SaveChangesAsync();
@@ -102,8 +102,8 @@ namespace Ecommerce_Back_End.Controllers
                     CATEID = request.CATEID,
                     SUBCATEID = request.SUBCATEID,
                     PROSPECID = request.PROSPECID,
-                    CREATEDATE = DateTime.Now,
-                    MODIFIEDDATE = DateTime.Now,
+                    CREATEDATE = DateTime.UtcNow,
+                    MODIFIEDDATE = DateTime.UtcNow,
                     DELETEDDATE = null
                 };
                 await _context.Product.AddAsync(product);
@@ -206,7 +206,7 @@ namespace Ecommerce_Back_End.Controllers
                     PROSPECID = request.PROSPECID,
                     SUBCATEID = request.SUBCATEID,
                     CREATEDATE = productExist.CREATEDATE,
-                    MODIFIEDDATE = DateTime.Now,
+                    MODIFIEDDATE = DateTime.UtcNow,
                     DELETEDDATE = null
                 };
                 _context.Product.Update(product);
@@ -262,7 +262,7 @@ namespace Ecommerce_Back_End.Controllers
                     PROSPECID = request.PROSPECID,
                     CREATEDATE = productExist.CREATEDATE,
                     MODIFIEDDATE = productExist.MODIFIEDDATE,
-                    DELETEDDATE = DateTime.Now
+                    DELETEDDATE = DateTime.UtcNow  
                 };
                 var filePathtoDeleted = Path.Combine(_env.WebRootPath, "Images", productExist.IMAGE);
                 if (System.IO.File.Exists(filePathtoDeleted))
