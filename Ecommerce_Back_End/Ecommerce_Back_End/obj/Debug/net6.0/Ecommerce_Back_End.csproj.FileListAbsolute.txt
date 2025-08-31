@@ -81,3 +81,5 @@ C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\obj
 C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\obj\Debug\net6.0\Ecommerce_Back_End.genruntimeconfig.cache
 C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\obj\Debug\net6.0\ref\Ecommerce_Back_End.dll
 C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\bin\Debug\net6.0\Ecommerce_Back_End.staticwebassets.runtime.json
+C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\bin\Debug\net6.0\Npgsql.dll
+C:\Users\OENG OUTEAB\Desktop\Ecommerce\Ecommerce_Back_End\Ecommerce_Back_End\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
