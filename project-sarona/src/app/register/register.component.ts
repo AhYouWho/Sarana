@@ -57,7 +57,7 @@ export class RegisterComponent {
             timeOut: 3000,
             progressBar: true,
           });
-          console.log('Error Log', 'res.message');
+          console.log('Error Log', res.message);
         }
       });
     }
