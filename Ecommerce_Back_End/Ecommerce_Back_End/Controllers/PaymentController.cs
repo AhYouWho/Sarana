@@ -19,7 +19,7 @@ namespace Ecommerce_Back_End.Controllers
                 Content = new StringContent(requestBody.ToString(), Encoding.UTF8, "application/json")
             };
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMDAzYWYxYzUwMzljNDk5YSJ9LCJpYXQiOjE3NTM1OTgxNTUsImV4cCI6MTc2MTM3NDE1NX0.4x7U5TS9KHXbLSylTR4t9BzEpmppZkwCcFT1DJz3wnM");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiMDAzYWYxYzUwMzljNDk5YSJ9LCJpYXQiOjE3NjA4Njk0NDUsImV4cCI6MTc2ODY0NTQ0NX0.seBQ8umFiJJ7iFXa5fSzhOeMtlhEYLjZfbsqnDzL9bc");
 
             var response = await client.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();

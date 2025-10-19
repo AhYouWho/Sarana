@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj": {}
+    "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj": {}
   },
   "projects": {
-    "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj": {
+    "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
+        "projectUniqueName": "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
         "projectName": "Ecommerce_Back_End",
-        "projectPath": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
+        "projectPath": "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
         "packagesPath": "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\obj\\",
+        "outputPath": "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\OENG OUTEAB\\AppData\\Roaming\\NuGet\\NuGet.Config",

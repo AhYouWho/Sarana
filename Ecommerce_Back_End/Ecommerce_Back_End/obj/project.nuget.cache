@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YZWg2S31XAp9XcWukewHFP/qIaIDBoUhatoSiYgnXB+q0bXFbpJTskbJv6mQEEB857ddKFaEhWaNDZM3Xo9DXw==",
+  "dgSpecHash": "+1DuoLuHTo83SbQBPT2gMOB/8C/Ma8khEQMFohgBhEa1kbaDfD6umkWVSkM0ar8r6BmFzA/t2V3RgrC9N2sx1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\OENG OUTEAB\\Desktop\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
+  "projectFilePath": "D:\\Lesson\\Ecommerce\\Ecommerce_Back_End\\Ecommerce_Back_End\\Ecommerce_Back_End.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\OENG OUTEAB\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
